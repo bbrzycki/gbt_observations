@@ -1,0 +1,22 @@
+fluxcal = Catalog(fluxcal)
+bl_gc = Catalog("users/bbrzycki/BL_GC_run1.cat")
+
+date = "feb20"
+probe_prefix = "/users/bbrzycki/observations/probes/%s" % date
+
+probes = ["newhorizons", "pioneer11"]
+for probe in probes:
+    Catalog("%s/%s.astrid" % (probe_prefix, probe))
+
+# calibrator = "DIAG_3C353"
+# Slew(calibrator)
+# Balance()
+
+# Observe solar system objects
+probe_srcs = ["DIAG_NEWHORIZONS", "DIAG_PIONEER11"]
+for i, probe_src in enumerate(probe_srcs):
+    Slew(probe_src)
+    # Only balance on first pointing
+    if i == 0:
+        Balance()
+    OnOff(probe_src, Offset('J2000', 0.0, 1.0, cosv=True), 3 * 60.0)
