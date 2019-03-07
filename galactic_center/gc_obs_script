@@ -3,5 +3,4 @@ bl_gc = Catalog("users/bbrzycki/BL_GC_run1.cat")
 
 src = "DIAG_GC"
 Slew(src)
-Balance()
 Track(src, None, 60 * 60.0)
