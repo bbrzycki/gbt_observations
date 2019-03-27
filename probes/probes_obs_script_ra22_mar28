@@ -9,7 +9,7 @@ for probe in probes:
     Catalog("%s/%s.astrid" % (probe_prefix, probe))
 
 # Observe solar system objects
-probe_srcs = ["DIAG_HAYABUSA2", "DIAG_PARKERSOLARPROBE", "DIAG_ROADSTER"]
+probe_srcs = ["DIAG_HAYABUSA2", "DIAG_ROADSTER", "DIAG_PARKERSOLARPROBE"]
 for i, probe_src in enumerate(probe_srcs):
     Slew(probe_src)
     OnOff(probe_src, Offset('J2000', 0.0, 1.0, cosv=True), 3 * 60.0)
