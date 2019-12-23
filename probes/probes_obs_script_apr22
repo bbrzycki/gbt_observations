@@ -1,10 +1,10 @@
 fluxcal = Catalog(fluxcal)
 bl_gc = Catalog("/users/bbrzycki/BL_GC_run1.cat")
 
-date = "mar09"
-probe_prefix = "/users/bbrzycki/gbt_observations/probes/%s" % date
+date = "apr22"
+probe_prefix = "/users/bbrzycki/observations/probes/%s" % date
 
-probes = ["newhorizons", "pioneer11"]
+probes = ["juno", "voyager1", "newhorizons", "pioneer11"]
 for probe in probes:
     Catalog("%s/%s.astrid" % (probe_prefix, probe))
 
@@ -13,7 +13,7 @@ for probe in probes:
 # Balance()
 
 # Observe solar system objects
-probe_srcs = ["DIAG_NEWHORIZONS", "DIAG_PIONEER11"]
+probe_srcs = ["DIAG_JUNO", "DIAG_VOYAGER1", "DIAG_NEWHORIZONS", "DIAG_PIONEER11"]
 for i, probe_src in enumerate(probe_srcs):
     Slew(probe_src)
     # Only balance on first pointing
