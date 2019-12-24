@@ -1,0 +1,50 @@
+fluxcal = Catalog(fluxcal)
+bl_gc = Catalog("/users/bbrzycki/gbt_observations/scint_obs/bl_gc.cat")
+scint_pointings = Catalog("/users/bbrzycki/gbt_observations/scint_obs/scint_pointings.cat")
+
+calibrator = "DIAG_3C353"
+sgr_b2 = "DIAG_SGR_B2_MAP_CENTER"
+
+
+
+
+Slew(calibrator)
+
+Balance()
+OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
+
+
+
+
+
+
+Slew(sgr_b2)
+Track(sgr_b2, None, 5*60.)
+
+
+
+
+
+pointings = [
+    'DIAG_GC_SCINT_L0_B-1',
+    'DIAG_GC_SCINT_L0_B-0.5',
+    'DIAG_GC_SCINT_L0_B0',
+    'DIAG_GC_SCINT_L0_B0.5',
+    'DIAG_GC_SCINT_L0_B1',
+    'DIAG_GC_SCINT_L0_B4',
+    'DIAG_GC_SCINT_L-2_B0',
+    'DIAG_GC_SCINT_L-1_B0',
+    'DIAG_GC_SCINT_L1_B0',
+    'DIAG_GC_SCINT_L2_B0',
+]
+
+for pointing in pointings:
+    Slew(pointing)
+    Track(pointing, None, 10*60.)
+
+
+
+
+
+Slew(calibrator)
+OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
