@@ -1,0 +1,47 @@
+fluxcal = Catalog(fluxcal)
+pulsars = Catalog(pulsars_brightest_GBT)
+bl_gc = Catalog("/users/bbrzycki/BL_GC_run1.cat")
+#ryan = Catalog("/users/hisaacso//")
+
+src = "DIAG_3C353"
+
+Slew(src)
+
+# Use DCR as switching signal master
+SetValues("SwitchingSignalSelector",{
+    "selCal": "Source_0",
+    "selSigRef": "Source_0",
+    "selAdvSigRef": "Source_0",
+    "selBlanking": "Source_0",
+    "state" : "prepare"
+})
+SetValues("ScanCoordinator", {
+    "subsystemSelect,DCR":"1",
+    "switching_signals_master": "DCR",
+    "state": "prepare"
+})
+
+#Turn on Cal
+rcvr = GetValue("LO1","receiver")
+if rcvr in ["Rcvr12_18","RcvrArray18_26","Rcvr26_40","Rcvr40_52","Rcvr68_92","RcvrArray75_116","Rcvr_MBA1_5"]:
+    print "I'm sorry Dave, I'm afraid I can't do that."
+    Break("Advanced control of receiver noise diodes is not supported for %s"%rcvr)
+
+else:
+    SetValues(rcvr, {
+        "xlExtToMCBCtrlSel":"ctlExt",
+        "yrExtToMCBCtrlSel":"ctlExt",
+        "xlCPUNoiseSwCtrl":"swOn",
+        "yrCPUNoiseSwCtrl":"swOn",
+        "state":"prepare"
+    })
+
+Balance()
+OnOff(src, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
+SetValues(rcvr, {
+        "xlExtToMCBCtrlSel":"ctlMcb",
+        "yrExtToMCBCtrlSel":"ctlMcb",
+        "xlCPUNoiseSwCtrl":"swOff",
+        "yrCPUNoiseSwCtrl":"swOff",
+        "state":"prepare"
+    })

@@ -1,0 +1,62 @@
+fluxcal = Catalog(fluxcal)
+pulsars = Catalog('/users/hisaacso/scripts/BL_emilio_pulsar_Cal.cat')
+bl_gc = Catalog("/users/bbrzycki/BL_GC_run1.cat")
+# put pulsar catalog 
+
+#replace this with your pulsar
+#src = "DIAG_PSR_J2022+2854"
+src = "DIAG_SGR_B2"
+
+
+Slew(src)
+
+# Use DCR as switching signal master
+SetValues("SwitchingSignalSelector",{
+    "selCal": "Source_0",
+    "selSigRef": "Source_0",
+    "selAdvSigRef": "Source_0",
+    "selBlanking": "Source_0",
+    "state" : "prepare"
+})
+SetValues("ScanCoordinator", {
+    "subsystemSelect,DCR":"1",
+    "switching_signals_master": "DCR",
+    "state": "prepare"
+})
+
+#Turn on Cal
+rcvr = GetValue("LO1","receiver")
+if rcvr in ["Rcvr12_18","RcvrArray18_26","Rcvr26_40","Rcvr40_52","Rcvr68_92","RcvrArray75_116","Rcvr_MBA1_5"]:
+    print "I'm sorry Dave, I'm afraid I can't do that."
+    Break("Advanced control of receiver noise diodes is not supported for %s"%rcvr)
+
+else:
+    SetValues(rcvr, {
+        "xlExtToMCBCtrlSel":"ctlExt",
+        "yrExtToMCBCtrlSel":"ctlExt",
+        "xlCPUNoiseSwCtrl":"swOn",
+        "yrCPUNoiseSwCtrl":"swOn",
+        "state":"prepare"
+    })
+
+
+Balance()
+#Break("Hello, world!")
+Track(src, None, 60.0)
+
+#Turn off Cal
+rcvr = GetValue("LO1","receiver")
+if rcvr in ["Rcvr12_18","RcvrArray18_26","Rcvr26_40","Rcvr40_52","Rcvr68_92","RcvrArray75_116","Rcvr_MBA1_5"]:
+    print "I'm sorry Dave, I'm afraid I can't do that."
+    Break("Advanced control of receiver noise diodes is not supported for %s"%rcvr)
+
+else:
+    SetValues(rcvr, {
+        "xlExtToMCBCtrlSel":"ctlMcb",
+        "yrExtToMCBCtrlSel":"ctlMcb",
+        "xlCPUNoiseSwCtrl":"swOff",
+        "yrCPUNoiseSwCtrl":"swOff",
+        "state":"prepare"
+    })
+
+Track(src, None, 10*60.0)

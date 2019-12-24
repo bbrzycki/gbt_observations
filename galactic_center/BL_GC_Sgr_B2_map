@@ -1,0 +1,19 @@
+fluxcal = Catalog(fluxcal)
+bl_gc = Catalog("/users/bbrzycki/BL_GC_run1.cat")
+
+calibrator = "DIAG_3C353"
+
+Slew(calibrator)
+
+Balance()
+OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
+
+PointMap('DIAG_SGR_B2_MAP_CENTER',
+    Offset('Galactic', 0.05, 0.00, cosv=True),
+    Offset('Galactic', 0.00, 0.02, cosv=True),
+    Offset('Galactic', 0.05 / 4., 0.00, cosv=True),
+    Offset('Galactic', 0.00, 0.02 / 3., cosv=True),
+    60.0)
+
+OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
+
