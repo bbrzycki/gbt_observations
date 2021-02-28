@@ -2,9 +2,9 @@ fluxcal = Catalog(fluxcal)
 bl_gc = Catalog("/users/bbrzycki/gbt_observations/scint_obs/bl_gc.cat")
 scint_pointings = Catalog("/users/bbrzycki/gbt_observations/scint_obs/scint_pointings.cat")
 
-calibrator = "DIAG_3C353"
-sgr_b2 = "DIAG_SGR_B2_MAP_CENTER"
-
+calibrator = "DIAG_3C348"
+sgr_b2 = "DIAG_SGR_B2"
+sgr_p = "DIAG_PSR_J1745-2900"
 
 
 
@@ -19,9 +19,10 @@ OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
 
 
 Slew(sgr_b2)
-Track(sgr_b2, None, 5*60.)
+Track(sgr_b2, None, 10*60.)
 
-
+Slew(sgr_p)
+Track(sgr_p, None, 10*60.)
 
 
 

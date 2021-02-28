@@ -1,0 +1,10 @@
+kepler_cat = Catalog("/users/bbrzycki/gbt_observations/kepler160/kepler160.cat")
+
+target = "KEPLER-160"
+
+Slew(target)
+
+OnOff(target, Offset("J2000", 0.0, 1.0, cosv=True), 300.0)
+OnOff(target, Offset("J2000", 1.0, 0.0, cosv=True), 300.0)
+OnOff(target, Offset("J2000", 0.0, -1.0, cosv=True), 300.0)
+
