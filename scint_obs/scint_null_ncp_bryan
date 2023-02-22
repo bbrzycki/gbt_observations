@@ -1,0 +1,19 @@
+fluxcal = Catalog(fluxcal)
+bl_gc = Catalog("/users/bbrzycki/gbt_observations/scint_obs/bl_gc.cat")
+scint_pointings = Catalog("/users/bbrzycki/gbt_observations/scint_obs/scint_pointings.cat")
+
+calibrator = "3C147"
+ncp = "DIAG_NCP"
+
+
+
+#Slew(calibrator)
+
+#Balance()
+#OnOff(calibrator, Offset("J2000", 0.0, 1.0, cosv=True), 60.0)
+
+
+Slew(ncp)
+Track(ncp, None, 10*60.)
+
+
