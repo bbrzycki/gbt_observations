@@ -1,0 +1,26 @@
+gc_cat = Catalog("/users/bbrzycki/gbt_observations/scintillation_survey/GC_map.cat")
+target_prefix = "DIAG_SCINT_GC"
+
+def on_off_cadence(target_list):
+    print "Observing",target_list
+    for i in range(2):
+        print "Iteration",i+1
+        for src in target_list:
+            print "Source",src
+            Track(target_prefix + "_" + src, None, 10 * 60.0)
+
+# Observation section (calibration etc done with ORBITS)
+# First, use high t_d scattering direction for RFI analysis
+Track(target_prefix + "_" + "NGP", None, 10 * 60.0)
+# If NGP isn't in the sky, can use NCP (should be rare)
+# Track(target_prefix + "_" + "NCP", None, 10 * 60.0)
+
+on_off_cadence(["A00", "C01", "C07"])
+on_off_cadence(["B01", "B04"])
+on_off_cadence(["B02", "B05"])
+on_off_cadence(["B03", "B06"])
+on_off_cadence(["C02", "C04"])
+on_off_cadence(["C03", "C05"])
+on_off_cadence(["C08", "C06"])
+on_off_cadence(["C11", "C09"])
+on_off_cadence(["C10", "C12"])

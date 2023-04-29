@@ -1,0 +1,52 @@
+bl_gc = Catalog("/users/bbrzycki/gbt_observations/scintillation_survey/GP_map.cat")
+target_prefix = "DIAG_SCINT_GP"
+
+def on_off_cadence(target_list):
+    print "Observing",target_list
+    for i in range(2):
+        print "Iteration",i+1
+        for src in target_list:
+            print "Source",src
+            Track(target_prefix + "_" + src, None, 10 * 60.0)
+
+# Observation section (calibration etc done with ORBITS)
+# First, use high t_d scattering direction for RFI analysis
+Track(target_prefix + "_" + "NGP", None, 10 * 60.0)
+# If NGP isn't in the sky, can use NCP (should be rare)
+# Track(target_prefix + "_" + "NCP", None, 10 * 60.0)
+
+on_off_cadence(["L5_B2", "L5_B1"])
+on_off_cadence(["L5_B0", "L5_B-1"])
+on_off_cadence(["L5_B-2", "L4_B-2"])
+on_off_cadence(["L4_B-1", "L4_B0"])
+on_off_cadence(["L4_B1", "L4_B2"])
+
+on_off_cadence(["L3_B2", "L3_B1"])
+on_off_cadence(["L3_B0", "L3_B-1"])
+on_off_cadence(["L3_B-2", "L2_B-2"])
+on_off_cadence(["L2_B-1", "L2_B0"])
+on_off_cadence(["L2_B1", "L2_B2"])
+
+on_off_cadence(["L1_B2", "L1_B1"])
+on_off_cadence(["L1_B0", "L1_B-1"])
+on_off_cadence(["L1_B-2", "L0_B-2"])
+on_off_cadence(["L0_B-1", "L0_B1"])
+on_off_cadence(["L0_B2", "L-1_B2"])
+on_off_cadence(["L-1_B1", "L-1_B0"])
+on_off_cadence(["L-1_B-1", "L-1_B-2"])
+
+on_off_cadence(["L-2_B-2", "L-2_B-1"])
+on_off_cadence(["L-2_B0", "L-2_B1"])
+on_off_cadence(["L-2_B2", "L-3_B2"])
+on_off_cadence(["L-3_B1", "L-3_B0"])
+on_off_cadence(["L-3_B-1", "L-3_B-2"])
+
+on_off_cadence(["L-4_B-2", "L-4_B-1"])
+on_off_cadence(["L-4_B0", "L-4_B1"])
+on_off_cadence(["L-4_B2", "L-5_B2"])
+on_off_cadence(["L-5_B1", "L-5_B0"])
+on_off_cadence(["L-5_B-1", "L-5_B-2"])
+
+
+
+
