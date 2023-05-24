@@ -1,4 +1,4 @@
-bl_gc = Catalog("/users/bbrzycki/gbt_observations/scintillation_survey/GP_map.cat")
+bl_gp = Catalog("/users/bbrzycki/gbt_observations/scintillation_survey/GP_map.cat")
 target_prefix = "DIAG_SCINT_GP"
 
 def on_off_cadence(target_list):
