@@ -42,9 +42,9 @@ Track(target_prefix + "_" + "NGP", None, 10 * 60.0)
 # on_off_cadence(["L-4_B-2", "L-4_B-1"])
 # on_off_cadence(["L-4_B0", "L-4_B1"])
 
-on_off_cadence(["L-4_B2", "L-5_B2"])
-on_off_cadence(["L-5_B1", "L-5_B0"])
-on_off_cadence(["L-5_B-1", "L-5_B-2"])
+# on_off_cadence(["L-4_B2", "L-5_B2"])
+# on_off_cadence(["L-5_B1", "L-5_B0"])
+# on_off_cadence(["L-5_B-1", "L-5_B-2"])
 
 
 
